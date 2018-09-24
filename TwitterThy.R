@@ -87,7 +87,7 @@ tweetsNegative <- tweets[tweets$negative>tweets$positive, ]
 
 
 ####################### START TOPIC MODELING ####################################
-
+# thanks to https://rpubs.com/cosmopolitanvan/topicmodeling
 # defaults parameters
 burnin <- 4000
 iter <- 2000
@@ -120,17 +120,10 @@ corpus <- Corpus(VectorSource(tweets_byusers_corpus))
 corpus <- tm_map(corpus, content_transformer(tolower)) 
 corpus <- tm_map(corpus, removePunctuation) 
 corpus <- tm_map(corpus,removeWords,stopwords("english")) 
-# corpus <- tm_map(corpus,removeWords,c("mindhunter", "david", "fincher","netflix")) 
 corpus <- tm_map(corpus, removeNumbers) 
 corpus <- tm_map(corpus,stripWhitespace) 
 # create document term matrix
 dtm <- DocumentTermMatrix(corpus) 
-
-# remove empty documents
-# rowTotals<-apply(dtm,1,sum) #running this line takes time
-# empty.rows<-dtm[rowTotals==0,]$dimnames[1][[1]] 
-# corpus<-corpus[-as.numeric(empty.rows)]
-# dtm <- DocumentTermMatrix(corpus)  
 
 inspect(dtm[1:5, 1:5])  
 dtm.mx <- as.matrix(dtm)
@@ -164,11 +157,6 @@ neg_corpus <- tm_map(neg_corpus,stripWhitespace)
 # create document term matrix
 neg_dtm <- DocumentTermMatrix(neg_corpus) 
 
-# remove empty documents
-# rowTotals<-apply(neg_dtm,1,sum) #running this line takes time
-# empty.rows<-neg_dtm[rowTotals==0,]$dimnames[1][[1]] 
-# neg_corpus<-neg_corpus[-as.numeric(empty.rows)]
-# neg_dtm <- DocumentTermMatrix(neg_corpus)  
 
 inspect(neg_dtm[1:5, 1:5])  
 neg_dtm.mx <- as.matrix(neg_dtm)
