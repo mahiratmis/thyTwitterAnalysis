@@ -24,9 +24,9 @@ library(servr)
 library(stringi)
 
 
-number_of_tweers_to_search <- 1000
+number_of_tweets_to_search <- 1000
 data_dir <- "~/Projects/R/data/"
-filename <- paste0("thytwitter",number_of_tweers_to_search,".csv")
+filename <- paste0("thytwitter",number_of_tweets_to_search,".csv")
 
 
 consumer_key <- '8kmONz7G**'
@@ -41,11 +41,10 @@ datalist =list()
 
 listofNames <- c("@TurkishAirlines", "@UKTurkish", "@TK_US", "@TK_HelpDesk", "@TK_Netherlands", "@TK_INDIA", "@TK_Norway", "@TA_IRELAND", "@TK_CAN", "#WidenYourWorld")
 print("Searching for Keywords")
-isFirst <- T
 i <- 1
 for (searchKeyWord in listofNames){
   print(sprintf("Searching for %s", searchKeyWord))
-  allthy <- searchTwitter(searchKeyWord, lang='en', n = number_of_tweers_to_search)
+  allthy <- searchTwitter(searchKeyWord, lang='en', n = number_of_tweets_to_search)
   if(length(allthy) == 0){
     print("Returned no results")
   }
@@ -61,18 +60,18 @@ for (searchKeyWord in listofNames){
 
 
 tweets = do.call(rbind, datalist)
+# save for persistance
 write.table(tweets, file = paste0(data_dir,filename), row.names=FALSE, na="", col.names=T, sep="\t", quote =T)
-
 tweetsRead <- read.csv(paste0(data_dir,filename), strip.white=TRUE, sep="\t", stringsAsFactors=FALSE)
 
-# get rid of empty columns 
+# get rid of empty text columns 
 purified <- tweets[!(is.na(tweets$text) | tweets$text=="" | tweets$text=="."), ]
-# get rid of empty columns 
+# get rid of empty screenName columns 
 purified <- tweets[!(is.na(tweets$screenName) | tweets$screenName=="" | tweets$screenName=="." | substring(tweets$screenName, 1, 1)=="<"), ]
 
 # remove special characters in the column called text and put the cleaned text in the new column called clean_text
 purified$clean_text <- str_replace_all(purified$text, "@\\w+", "")
-# remove special characters in the column called text and put the cleaned text in the new column called clean_text
+# remove special characters in the column called screenName and put the cleaned text in the new column called screenName
 purified$screenName<- str_replace_all(purified$screenName, "@\\w+", "")
 
 # extract sentiments from tweets. The sentiment information is stored in the dataframe called Sentiment
