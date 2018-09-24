@@ -29,10 +29,10 @@ data_dir <- "~/Projects/R/data/"
 filename <- paste0("thytwitter",number_of_tweers_to_search,".csv")
 
 
-consumer_key <- '8kmONz7G5MYVBhs8ErTXkZ9Ce'
-consumer_secret <- 'vORYByyR9it4m9tEq1lVDN9jlZHVGsgCPt3dnwfB85ZuMnq3J9'
-access_token <- '1158143544-A4xVk7iCqdeD7eEWmW8CtOwg0ifKk8DWYz7h3rp'
-access_secret <- 'reBZWrtVA02awxpVjmgLM5qyyhfRVDE2KWvGvcyacqqKL'
+consumer_key <- '8kmONz7G**'
+consumer_secret <- 'vORYByyR9i**'
+access_token <- '1158143544-A4xVk7iCqdeD7eE**'
+access_secret <- 'reBZWrtVA02awxpVjmgLM5qyyhfRV**'
 
 setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 
@@ -186,7 +186,7 @@ neg_ldaOut.terms[1:6,]
 source("https://raw.githubusercontent.com/LucasPuente/geocoding/master/geocode_helpers.R")
 source("https://raw.githubusercontent.com/LucasPuente/geocoding/master/modified_geocode.R")
 geocode_apply<-function(x){
-  geocode(x, source = "google", output = "all", api_key="AIzaSyC2__f1WoYYMNW-N45k_iqaUeKl_yFfoqE")
+  geocode(x, source = "google", output = "all", api_key="AIzaSyC2__f1WoY***")
 }
 
 # how many users per sentiment(positive or negative) do you want to analyze
