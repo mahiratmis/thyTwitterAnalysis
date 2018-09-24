@@ -87,7 +87,7 @@ tweetsNegative <- tweets[tweets$negative>tweets$positive, ]
 
 
 ####################### START TOPIC MODELING ####################################
-# thanks to https://rpubs.com/cosmopolitanvan/topicmodeling
+# thanks to Wayne Weiai Xu https://rpubs.com/cosmopolitanvan/topicmodeling
 # defaults parameters
 burnin <- 4000
 iter <- 2000
